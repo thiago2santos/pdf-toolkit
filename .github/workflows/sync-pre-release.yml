@@ -1,7 +1,7 @@
-name: Sync pre-release with main
+name: Backport main to pre-release
 
-# When a promote PR (pre-release → main) is merged, ensure pre-release
-# contains any merge commits that landed only on main.
+# After a promote PR (pre-release → main) merges, open a PR to bring
+# main's unique commits back into pre-release (ruleset-friendly).
 
 on:
   pull_request:
@@ -10,9 +10,10 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
-  sync:
+  backport:
     if: >
       github.event.pull_request.merged == true &&
       github.event.pull_request.head.ref == 'pre-release'
@@ -24,19 +25,41 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Merge main into pre-release (ff or merge)
+      - name: Open backport PR (main → pre-release)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git fetch origin main pre-release
-          git checkout pre-release
-          git pull origin pre-release
-          if git merge-base --is-ancestor origin/main HEAD; then
-            echo "pre-release already contains main — nothing to sync"
+
+          if git merge-base --is-ancestor origin/main origin/pre-release; then
+            echo "pre-release already contains main — nothing to backport"
             exit 0
           fi
-          git merge origin/main -m "chore: sync pre-release with main after promote"
-          git push origin pre-release
+
+          BRANCH="backport/main-into-pre-release"
+
+          existing="$(gh pr list --repo "${{ github.repository }}" \
+            --base pre-release --state open \
+            --json number,headRefName \
+            --jq ".[] | select(.headRefName==\"${BRANCH}\") | .number" \
+            | head -n1)"
+          if [ -n "${existing}" ]; then
+            echo "Backport PR already open: #${existing}"
+            exit 0
+          fi
+
+          git checkout -B "${BRANCH}" origin/pre-release
+          git merge origin/main -m "chore: backport main into pre-release after promote"
+          git push -u origin "${BRANCH}" --force-with-lease
+
+          gh pr create --repo "${{ github.repository }}" \
+            --base pre-release \
+            --head "${BRANCH}" \
+            --title "chore: backport main into pre-release" \
+            --body "Reconciles \`pre-release\` with commits that landed only on \`main\` after promote (often squash/merge).
+
+          This is the post-promote **backport** step: not a new feature, just bringing \`main\` back into the integration branch under the branch ruleset (PR required)."
