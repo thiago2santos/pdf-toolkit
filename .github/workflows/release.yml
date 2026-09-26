@@ -1,0 +1,29 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*"
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: maven
+      - name: Build dist
+        run: ./mvnw -B -DskipTests package
+      - name: Rename artifact
+        run: |
+          unzip -l target/*-dist.zip
+          cp target/*-dist.zip "pdf-toolkit-${GITHUB_REF_NAME}-linux.zip"
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: pdf-toolkit-${{ github.ref_name }}-linux.zip
+          generate_release_notes: true

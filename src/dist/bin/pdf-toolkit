@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+CP=""
+MP=""
+for j in lib/*.jar; do
+  case "$j" in
+    *javafx*)
+      MP="${MP:+$MP:}$j"
+      ;;
+    *)
+      CP="${CP:+$CP:}$j"
+      ;;
+  esac
+done
+exec java \
+  --enable-native-access=javafx.graphics \
+  --module-path "$MP" \
+  --add-modules javafx.controls,javafx.graphics \
+  -cp "$CP" \
+  com.pdftoolkit.PdfToolkitApp \
+  "$@"
