@@ -1,0 +1,37 @@
+name: Promote pre-release to main
+
+# Manual only: run after production deploy (post-GMUD), not on Release merge.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Released tag to cite in the promote PR title (e.g. v0.1.1)
+        required: false
+        default: manual
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open promote PR (pre-release → main)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          existing="$(gh pr list --repo "${{ github.repository }}" \
+            --base main --head pre-release --state open \
+            --json number --jq '.[0].number // empty')"
+          if [ -n "$existing" ]; then
+            echo "Promote PR already open: #$existing"
+            exit 0
+          fi
+          gh pr create --repo "${{ github.repository }}" \
+            --base main \
+            --head pre-release \
+            --title "chore: promote ${TAG} to main" \
+            --body "Manual promotion after production deploy of ${TAG}. Sync workflow realigns pre-release if needed."
