@@ -30,3 +30,35 @@ jobs:
           echo "release_created=${{ steps.release.outputs.release_created }}"
           echo "prs_created=${{ steps.release.outputs.prs_created }}"
           echo "tag_name=${{ steps.release.outputs.tag_name }}"
+
+      # GITHUB_TOKEN tag/release events do not cascade to other workflows.
+      # Build and attach the dist zip in the same job when a release is cut.
+      - name: Checkout release tag
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.release.outputs.tag_name }}
+
+      - name: Set up JDK 25
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: maven
+
+      - name: Build dist zip
+        if: ${{ steps.release.outputs.release_created }}
+        run: ./mvnw -B -DskipTests package
+
+      - name: Upload linux dist to GitHub Release
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.release.outputs.tag_name }}
+        run: |
+          set -euo pipefail
+          ARTIFACT="pdf-toolkit-${TAG}-linux.zip"
+          cp target/*-dist.zip "${ARTIFACT}"
+          unzip -l "${ARTIFACT}"
+          gh release upload "${TAG}" "${ARTIFACT}" --clobber
