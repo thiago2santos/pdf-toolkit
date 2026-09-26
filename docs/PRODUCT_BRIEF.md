@@ -226,17 +226,21 @@ Monetização (*)   → Avaliar ads no site / doação / “Pro” (só após us
 
 - [ ] Nome definitivo do produto
 - [ ] Ícone / identidade visual mínima
-- [ ] Maven vs Gradle
+- [x] ~~Maven vs Gradle~~ → **Maven**
 - [ ] Publicar open source ou só binários?
-- [ ] Linux: `.deb` / AppImage / só jar no v1?
+- [x] ~~Linux: só jar no começo~~ → **dist zip + launcher** (Release anexa `*-linux.zip`); `.deb` / AppImage / `jpackage` depois
+- [ ] Artefato Windows no CI (matrix)
 
 ## 16. Próximos passos
 
-1. ~~Congelar escopo v1 (features F1–F7)~~ ✅ 2026-09-26 — [SCOPE_V1.md](./SCOPE_V1.md)
-2. **Criar repositório e skeleton JavaFX + PDFBox** ← atual
-3. Implementar Split + Merge (primeiro valor real)
-4. Completar F4–F7 e smoke test Win + Linux
-5. Usar em tarefas reais; só então falar de v1.1
+Checkpoint operacional: **[CONTINUE.md](./CONTINUE.md)** (atualizado 2026-09-26).
+
+1. ~~Congelar escopo v1 (F1–F7)~~ ✅
+2. ~~Skeleton JavaFX + PDFBox + quality tools~~ ✅
+3. ~~CI + rulesets + Release Please + zip em prod (`v0.1.2`)~~ ✅
+4. (Opcional) Promote `v0.1.2` → `main` + backport
+5. **Implementar F1–F7** (começar por Split + Merge) ← próximo valor de produto
+6. Smoke test Win + Linux; uso real; só então v1.1
 
 ---
 
