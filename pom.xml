@@ -31,6 +31,8 @@
         <owasp-dependency-check.version>13.0.0</owasp-dependency-check.version>
 
         <main.class>com.pdftoolkit.PdfToolkitApp</main.class>
+
+        <assembly-plugin.version>3.7.1</assembly-plugin.version>
     </properties>
 
     <dependencies>
@@ -134,6 +136,37 @@
                     </suppressionFiles>
                 </configuration>
             </plugin>
+  <plugin>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.4.2</version>
+      <configuration>
+          <archive>
+              <manifest>
+                  <mainClass>${main.class}</mainClass>
+              </manifest>
+          </archive>
+      </configuration>
+  </plugin>
+  <plugin>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <version>${assembly-plugin.version}</version>
+      <configuration>
+          <descriptors>
+              <descriptor>src/assembly/dist.xml</descriptor>
+          </descriptors>
+          <appendAssemblyId>true</appendAssemblyId>
+      </configuration>
+      <executions>
+          <execution>
+              <id>make-dist</id>
+              <phase>package</phase>
+              <goals>
+                  <goal>single</goal>
+              </goals>
+          </execution>
+      </executions>
+  </plugin>
+
         </plugins>
     </build>
 </project>
