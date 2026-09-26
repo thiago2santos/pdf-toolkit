@@ -1,0 +1,42 @@
+name: Sync pre-release with main
+
+# When a promote PR (pre-release → main) is merged, ensure pre-release
+# contains any merge commits that landed only on main.
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: >
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.head.ref == 'pre-release'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge main into pre-release (ff or merge)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main pre-release
+          git checkout pre-release
+          git pull origin pre-release
+          if git merge-base --is-ancestor origin/main HEAD; then
+            echo "pre-release already contains main — nothing to sync"
+            exit 0
+          fi
+          git merge origin/main -m "chore: sync pre-release with main after promote"
+          git push origin pre-release
