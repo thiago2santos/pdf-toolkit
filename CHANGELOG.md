@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.0](https://github.com/thiago2santos/pdf-toolkit/compare/v0.1.2...v0.2.0) (2026-09-27)
+
+
+### Features
+
+* open, preview and save PDFs with MVVM architecture ([#15](https://github.com/thiago2santos/pdf-toolkit/issues/15)) ([34adadc](https://github.com/thiago2santos/pdf-toolkit/commit/34adadc027144c7437a901cdb8a60708028c3757))
+
+
+### Documentation
+
+* add continue checkpoint after v0.1.2 platform work ([#11](https://github.com/thiago2santos/pdf-toolkit/issues/11)) ([4d9f47f](https://github.com/thiago2santos/pdf-toolkit/commit/4d9f47fefc8a4e91addcb471db47391cf369ae02))
+
 ## [0.1.2](https://github.com/thiago2santos/pdf-toolkit/compare/v0.1.1...v0.1.2) (2026-09-26)
 
 

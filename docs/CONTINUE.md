@@ -2,7 +2,7 @@
 
 Última atualização: **2026-09-26**
 Repo: https://github.com/thiago2santos/pdf-toolkit
-Docs de produto: [PRODUCT_BRIEF.md](./PRODUCT_BRIEF.md) · [SCOPE_V1.md](./SCOPE_V1.md)
+Docs de produto: [PRODUCT_BRIEF.md](./PRODUCT_BRIEF.md) · [SCOPE_V1.md](./SCOPE_V1.md) · [ARCHITECTURE.md](./ARCHITECTURE.md)
 
 > Leia este arquivo ao retomar o trabalho. É o “checkpoint” operacional (como o `HOTEL-STACK-CONTINUE` do availability-api).
 
@@ -77,8 +77,8 @@ Commits que movem versão: `feat:` (minor pré-1.0), `fix:` (patch).
 Retomar o roadmap do escopo congelado — **features de PDF**:
 
 ```text
-1. Arquitetura UI × domínio × I/O (não empilhar tudo na Application)
-2. F1 Abrir + F7 Salvar
+1. Arquitetura UI × domínio × I/O → decidido: MVVM, ver [ARCHITECTURE.md](./ARCHITECTURE.md)
+2. F1 Abrir + F9-lite Visualizar páginas + F7 Salvar
 3. F2 Split + F3 Merge   ← primeiro uso real no dia a dia
 4. F4 Extrair + F5 Remover
 5. F6 Rotacionar

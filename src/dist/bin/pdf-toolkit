@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$ROOT"
 CP=""
 MP=""
-for j in lib/*.jar; do
+for j in "$ROOT"/lib/*.jar; do
   case "$j" in
     *javafx*)
       MP="${MP:+$MP:}$j"
