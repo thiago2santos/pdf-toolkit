@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1](https://github.com/thiago2santos/pdf-toolkit/compare/v0.2.0...v0.2.1) (2026-09-27)
+
+
+### Documentation
+
+* update continue checkpoint for v0.2.0 and PR rules ([#19](https://github.com/thiago2santos/pdf-toolkit/issues/19)) ([9ddfb9c](https://github.com/thiago2santos/pdf-toolkit/commit/9ddfb9c9854af0cd7d51f12381172e6c73635f64))
+* update scope freeze status for v0.2.0 ([#21](https://github.com/thiago2santos/pdf-toolkit/issues/21)) ([6969e6d](https://github.com/thiago2santos/pdf-toolkit/commit/6969e6dcc1be8ad2633a6cd5e0e167885a11bca6))
+
 ## [0.2.0](https://github.com/thiago2santos/pdf-toolkit/compare/v0.1.2...v0.2.0) (2026-09-27)
 
 
