@@ -116,6 +116,7 @@ Baixa o app quando precisa split/merge uma vez; não quer cadastrar nem pagar.
 
 > Freeze em 2026-09-26. Detalhe e critérios de aceite: **[SCOPE_V1.md](./SCOPE_V1.md)**.
 > Features fora de F1–F7 não entram na v1 sem novo freeze.
+> Revisão 2026-09-27: **F9-lite** (visualizar páginas ao abrir, somente leitura) entrou na v1.
 
 ### Must have (IN)
 
@@ -128,13 +129,14 @@ Baixa o app quando precisa split/merge uma vez; não quer cadastrar nem pagar.
 | F5 | Remover páginas | Gerar PDF sem as páginas indicadas | P0 |
 | F6 | Rotacionar | Girar páginas 90/180/270° | P0 |
 | F7 | Salvar resultado | Escolher pasta/nome de saída | P0 |
+| F9-lite | Visualizar páginas | Páginas renderizadas ao abrir, rolagem vertical | P0 |
 
 ### Should have (OUT da v1 → v1.1+)
 
 | ID | Feature | Prioridade |
 | --- | --- | --- |
 | F8 | Reordenar páginas (lista / drag) | P1 |
-| F9 | Preview simples de páginas | P1 |
+| F9 | Preview completo (zoom, miniaturas, seleção visual) | P1 |
 | F10 | Histórico recente de arquivos | P2 |
 
 ### Out of scope (v1)
@@ -146,7 +148,7 @@ Baixa o app quando precisa split/merge uma vez; não quer cadastrar nem pagar.
 - Assinatura digital
 - Batch em pasta inteira
 - Auto-update
-- Reordenar / preview / histórico (F8–F10)
+- Reordenar / preview completo / histórico (F8–F10; F9-lite está IN)
 
 ## 9. Roadmap de produto
 
@@ -233,14 +235,16 @@ Monetização (*)   → Avaliar ads no site / doação / “Pro” (só após us
 
 ## 16. Próximos passos
 
-Checkpoint operacional: **[CONTINUE.md](./CONTINUE.md)** (atualizado 2026-09-26).
+Checkpoint operacional: **[CONTINUE.md](./CONTINUE.md)** (atualizado 2026-09-27).
 
 1. ~~Congelar escopo v1 (F1–F7)~~ ✅
 2. ~~Skeleton JavaFX + PDFBox + quality tools~~ ✅
 3. ~~CI + rulesets + Release Please + zip em prod (`v0.1.2`)~~ ✅
-4. (Opcional) Promote `v0.1.2` → `main` + backport
-5. **Implementar F1–F7** (começar por Split + Merge) ← próximo valor de produto
-6. Smoke test Win + Linux; uso real; só então v1.1
+4. ~~Arquitetura MVVM ([ARCHITECTURE.md](./ARCHITECTURE.md))~~ ✅
+5. ~~F1 Abrir + F9-lite Visualizar + F7 Salvar (`v0.2.0`, promovida para `main`)~~ ✅
+6. **F2 Split + F3 Merge** ← próximo valor de produto
+7. F4 Extrair + F5 Remover + F6 Rotacionar
+8. Smoke test Win + Linux; uso real; só então v1.1
 
 ---
 
