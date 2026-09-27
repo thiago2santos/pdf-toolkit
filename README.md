@@ -6,11 +6,12 @@ Desktop app (Windows / Linux) for local PDF manipulation.
 | --- | --- |
 | [`docs/CONTINUE.md`](docs/CONTINUE.md) | **Checkpoint** — onde paramos / por onde continuar |
 | [`docs/PRODUCT_BRIEF.md`](docs/PRODUCT_BRIEF.md) | Visão e decisões de produto |
-| [`docs/SCOPE_V1.md`](docs/SCOPE_V1.md) | Escopo congelado da v1 (F1–F7) |
+| [`docs/SCOPE_V1.md`](docs/SCOPE_V1.md) | Escopo congelado da v1 (F1–F7 + F9-lite) |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Arquitetura (MVVM) e regras de pacotes |
 
-**Latest release:** [v0.1.2](https://github.com/thiago2santos/pdf-toolkit/releases/tag/v0.1.2) (`pdf-toolkit-v0.1.2-linux.zip`)
+**Latest release:** [v0.2.0](https://github.com/thiago2santos/pdf-toolkit/releases/tag/v0.2.0) (`pdf-toolkit-v0.2.0-linux.zip`)
 
-Default branch: `pre-release` (fluxo Release Please → promote → backport).
+Default branch: `pre-release` (fluxo Release Please → promote → backport). PRs para `pre-release` exigem 1 aprovação (admin pode fazer bypass).
 
 ## Requirements
 
@@ -27,7 +28,7 @@ Default branch: `pre-release` (fluxo Release Please → promote → backport).
 
 ```shell
 ./mvnw -DskipTests package
-./target/pdf-toolkit-*-dist/pdf-toolkit-*/bin/pdf-toolkit
+./target/pdf-toolkit-*-dist/pdf-toolkit-*/bin/pdf-toolkit [arquivo.pdf]
 ```
 
 ## Test & quality
@@ -66,5 +67,8 @@ pre-commit run --all-files
 
 ## v1 scope
 
-Frozen in [`docs/SCOPE_V1.md`](docs/SCOPE_V1.md): open, split, merge, extract, remove, rotate, save.
-**App features still TODO** — platform/release plumbing is done first.
+Frozen in [`docs/SCOPE_V1.md`](docs/SCOPE_V1.md): open, preview pages, split, merge, extract, remove, rotate, save.
+
+| Done (v0.2.0) | Next |
+| --- | --- |
+| Open (F1), page preview (F9-lite), save copy (F7) | Split (F2) + Merge (F3), then extract/remove/rotate |
