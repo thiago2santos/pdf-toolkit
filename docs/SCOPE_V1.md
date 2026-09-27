@@ -114,5 +114,5 @@ Nada de F8+ (exceto F9-lite) antes de F1–F7 estarem usáveis.
 | --- | --- | --- |
 | Product owner | Thiago | 2026-09-26 |
 
-**Escopo v1 congelado.** Plataforma de release ok até `v0.1.2`.
-**Próximo:** features F1–F7 — ver [CONTINUE.md](./CONTINUE.md).
+**Escopo v1 congelado.** Entregue em `v0.2.0`: F1, F9-lite, F7.
+**Próximo:** F2 Split + F3 Merge — ver [CONTINUE.md](./CONTINUE.md).
