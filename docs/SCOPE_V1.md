@@ -37,7 +37,7 @@
 | ID | Item | Critério |
 | --- | --- | --- |
 | **P1** | Execução local | App sobe via Maven/Gradle + JavaFX |
-| **P2** | Artefato jar | É possível rodar em Windows e Linux com Java instalado (`java -jar` ou equivalente documentado) |
+| **P2** | Dist zip | `./mvnw package` gera zip com `bin/pdf-toolkit` + `lib/`; Release anexa `pdf-toolkit-<tag>-linux.zip` |
 
 ---
 
@@ -107,4 +107,5 @@ Nada de F8+ antes de F1–F7 estarem usáveis.
 | --- | --- | --- |
 | Product owner | Thiago | 2026-09-26 |
 
-**Escopo v1 congelado.** Próximo passo: skeleton do projeto.
+**Escopo v1 congelado.** Plataforma de release ok até `v0.1.2`.
+**Próximo:** features F1–F7 — ver [CONTINUE.md](./CONTINUE.md).
